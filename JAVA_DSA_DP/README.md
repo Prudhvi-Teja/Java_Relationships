@@ -52,6 +52,10 @@ O(n×m)
 O(n×m) but Bottom-Up avoids recursion overhead	
 
 
+IMP : Whenever you are given a problem of subsets mostly it's a DP problem
+
+
+
 
 
 
