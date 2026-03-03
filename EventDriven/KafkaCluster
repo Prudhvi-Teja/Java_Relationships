@@ -1,0 +1,58 @@
+Kafka Cluster
+
+It is a group of brokers working together to provide
+
+scalability
+Fault tolerance
+High availability
+
+To achieve this it follows Leader follow architecture
+
+
+
+Overview of Kafka
+Event-Driven Architecture (EDA): The video emphasizes the significance of EDA, where systems react to events in real-time, enhancing responsiveness and flexibility.
+Kafka's Role: Apache Kafka serves as a distributed streaming platform that facilitates the handling and processing of real-time data streams.
+Key Components of Kafka
+Producers:
+
+Applications that publish (write) data to Kafka topics.
+Can send messages to multiple topics and utilize partitioning for load balancing.
+Topics:
+
+Categories or feed names for published records.
+Each topic can be divided into multiple partitions, allowing for scalability and parallel processing.
+Consumers:
+
+Applications that subscribe to (read) data from Kafka topics.
+Can belong to consumer groups for load balancing, where each message is delivered to one consumer in the group.
+Brokers:
+
+Kafka servers that store data and handle client requests.
+Each broker can manage multiple topic partitions.
+Zookeeper:
+
+A centralized service for managing and coordinating Kafka brokers.
+Responsible for leader election, configuration management, and maintaining metadata about topics and partitions.
+Kafka Architecture
+Cluster: A Kafka cluster is composed of multiple brokers working together to manage data distribution and client requests.
+Partitioning:
+Each topic can have multiple partitions, which allows Kafka to scale horizontally.
+Data within a partition is ordered, ensuring the sequence of events is maintained.
+Leader-Follower Architecture
+Leader: Each partition has one leader broker responsible for all read and write operations for that partition.
+Followers: Other brokers act as followers, replicating the data from the leader. They do not handle client requests directly.
+Replication: Followers replicate the leader's data to ensure fault tolerance. If the leader fails, one of the followers can take over as the new leader, ensuring high availability.
+Message Flow in Kafka
+Publishing Messages: Producers send messages to specific topics, with each message assigned a unique offset within its partition.
+Consuming Messages: Consumers read messages from topics, tracking their offsets to know which messages have been processed. This allows for reprocessing if necessary.
+Advantages of Kafka
+Scalability: Kafka can handle large volumes of data and scales by adding more brokers and partitions.
+Durability: Messages are persisted on disk, preventing data loss even if a broker fails.
+High Throughput: Kafka is optimized for high throughput, making it suitable for processing large streams of data in real-time.
+Use Cases
+Log Aggregation: Centralizes logs from various services into a single system for easier analysis and monitoring.
+Stream Processing: Integrates with stream processing frameworks (e.g., Apache Flink, Apache Spark) for real-time data processing.
+Event Sourcing: Stores events as a log, enabling applications to reconstruct their state from event history.
+Conclusion
+The video concludes by highlighting Kafka's pivotal role in modern architectures, especially in enabling real-time data processing and supporting event-driven systems. Its robust architecture, including the leader-follower model, ensures high availability and fault tolerance.
