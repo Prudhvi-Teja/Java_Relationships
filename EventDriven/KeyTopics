@@ -1,0 +1,44 @@
+Kafka Architecture - Part 2: Key Concepts
+
+This video focuses on essential components of Kafka's architecture, including consumer groups, offset management, and the Kafka cluster.
+
+Consumer and Consumer Groups
+
+Consumers read data from Kafka topics.
+Consumer groups organize consumers.
+Rule 1: Consumers in the same group read different partitions.
+Rule 2: Consumers in different groups can read the same partition.
+Offset Commits
+
+Kafka tracks the progress of each consumer group using offsets.
+This information is stored in an internal topic: _consumer_offsets.
+Storing offsets group-wise (not consumer-wise) ensures seamless takeover if a consumer fails.
+When a new consumer starts, it can fetch the last processed offset for its group and partition from _consumer_offsets.
+Offset Commit Strategies
+
+Auto-commit:
+Commits offsets automatically at set intervals.
+Risk: Data loss can occur if a consumer crashes before processing events but after the offset has been auto-committed.
+Manual commit (recommended):
+Allows consumers to decide when to commit offsets.
+Batch commit: Process a batch of events, then commit the offset for the entire batch. This reduces duplicate processing upon crash.
+Per-event commit: Committing after every single event is generally not recommended due to increased overhead, especially with high event volumes.
+Kafka Cluster
+
+A Kafka cluster is a group of brokers working together.
+It provides:
+Scalability: Distributes load across multiple servers.
+Fault tolerance: Continues operating even if a broker fails.
+High availability: No single point of failure.
+Leader-Follower Partition Architecture
+
+For each partition, one broker is designated as the leader, and others are followers.
+Leader responsibilities:
+Handles all producer writes and consumer reads for that partition.
+Maintains the partition logs.
+Coordinates with followers.
+Follower responsibilities:
+Replicate data from the leader.
+Stay in sync with the leader.
+Are ready to become a leader if the current leader fails.
+Do not serve clients directly; only the leader does.
